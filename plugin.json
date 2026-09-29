@@ -22,7 +22,7 @@
     "com.openai": {
       "interface": {
         "displayName": "Adaption",
-        "shortDescription": "AI datasets, fine-tuning, and AutoScientist workflows",
+        "shortDescription": "AI datasets & model training",
         "longDescription": "Import, adapt, augment, translate, and combine datasets. Launch AutoScientist training runs. Generate synthetic datasets with Invent.",
         "developerName": "Adaption Labs",
         "category": "Development",
