@@ -1,0 +1,44 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "adaption",
+  "version": "0.1.0",
+  "description": "Adaption plugin for ChatGPT and Codex — datasets, fine-tuning, and AutoScientist workflows powered by the Adaption MCP server",
+  "author": {
+    "name": "Adaption Labs",
+    "email": "support@adaptionlabs.ai"
+  },
+  "homepage": "https://adaptionlabs.ai",
+  "repository": "https://github.com/adaptionlabs/adaption-codex-plugin",
+  "license": "MIT",
+  "keywords": [
+    "adaption",
+    "datasets",
+    "fine-tuning",
+    "autoscientist",
+    "mcp",
+    "ai-training"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Adaption",
+        "shortDescription": "AI datasets, fine-tuning, and AutoScientist workflows",
+        "longDescription": "Import, adapt, augment, translate, and combine datasets. Launch AutoScientist training runs. Generate synthetic datasets with Invent.",
+        "developerName": "Adaption Labs",
+        "category": "Development",
+        "capabilities": ["Read", "Write"],
+        "websiteURL": "https://adaptionlabs.ai",
+        "privacyPolicyURL": "https://adaptionlabs.ai/privacy",
+        "termsOfServiceURL": "https://adaptionlabs.ai/terms",
+        "defaultPrompt": [
+          "List my Adaption datasets",
+          "Import a dataset from HuggingFace and adapt it",
+          "Start an AutoScientist training run"
+        ],
+        "brandColor": "#3B82F6",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/logo.svg"
+      }
+    }
+  }
+}
