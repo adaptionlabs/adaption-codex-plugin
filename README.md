@@ -54,12 +54,12 @@ Connect ChatGPT and Codex to [Adaption](https://adaptionlabs.ai) for dataset man
 - Browse available **base models**
 - Get **hyperparameter recommendations**
 - Launch **AutoScientist training runs**
-- Monitor **training progress** and iterations
+- Monitor **training progress** and results
 
 ### 🔬 Invent (2 tools)
 
 - Explore available **domains and subdomains**
-- **Generate synthetic datasets** from specifications
+- **Generate synthetic datasets** from natural language descriptions
 
 ## Available Skills
 
@@ -112,7 +112,7 @@ Once installed, interact with Adaption through natural conversation:
 
 > "Import this HuggingFace dataset and adapt it for fine-tuning"
 
-> "Start fine-tuning llama-3.1-8b on my adapted dataset"
+> "Start fine-tuning on my adapted dataset and pick a suitable base model"
 
 > "Generate 1000 customer service examples using Invent"
 

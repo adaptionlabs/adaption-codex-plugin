@@ -39,7 +39,18 @@ Use these tools via the Adaption MCP server:
 
 ### Import and adapt a HuggingFace dataset
 
-1. Call `import_dataset` with HuggingFace URL
+1. Call `import_dataset` with a `source` object — all import options nest inside it:
+   ```json
+   {
+     "source": {
+       "url": "https://huggingface.co/datasets/squad",
+       "files": ["plain_text/train-00000-of-00001.parquet"]
+     }
+   }
+   ```
+   `files` is required for HuggingFace and Kaggle imports and rejected for Google
+   Sheets. Pass `processing_mode: "raw"` to import a trainable dataset without
+   running Adaptive Data.
 2. Poll `get_dataset_status` until processing completes
 3. Call `run_dataset_adaptation` with `estimate: true` to preview cost
 4. Call `run_dataset_adaptation` with column mapping to launch
@@ -51,29 +62,48 @@ Use these tools via the Adaption MCP server:
 1. Ensure source dataset status is `ready`
 2. Call `augment_dataset` with:
    - `dataset_id`: Source dataset ID
-   - `domain_rows`: Number of domain-specific rows to add
-   - `general_rows`: Number of general rows to add
+   - `domain_rows`: More samples from the domain already present in the dataset
+   - `general_rows`: Samples from other domains not present in it
+   - `training_type`: `instruction_dataset` (default) or `preference_pairs`
    - `estimate: true` for cost preview
 3. Launch with `estimate: false`
 4. Poll `get_dataset_status` on the new dataset ID
+
+Each row count tops out at 100,000 per strategy. Augmenting creates a new dataset
+rather than modifying the source.
 
 ### Translate dataset to multiple languages
 
 1. Call `translate_dataset` with:
    - `dataset_id`: Source dataset ID
    - `languages`: Array of target language codes
-   - `sample_size`: Number of rows to translate
+   - `sample_rate`: Share of rows to translate, between 0.01 and 1
+   - `estimate: true` for cost preview
 2. Poll `get_dataset_status` until translation completes
+
+`localize_dataset` takes the same `sample_rate` but replaces `languages` with
+`pairs`, an array of `{ "country": "RS", "language": "sr" }` objects.
 
 ### Combine multiple datasets
 
 1. Ensure all source datasets have compatible schemas and status `ready`
-2. Call `combine_datasets` with array of dataset IDs
-3. Use `idempotency_key` to prevent duplicate combinations
+2. Call `combine_datasets` with:
+   - `dataset_ids`: 2 to 10 unique dataset IDs, each a UUID v4
+   - `name`: Required name for the combined dataset
+   - `idempotency_key`: Required — reusing the same key returns the same result
+     instead of combining twice
+
+All sources must belong to the same organization.
 
 ## Column Mapping
 
-When running adaptation, specify how columns map to training format:
+When calling `run_dataset_adaptation`, map dataset columns to roles. Full rules: https://docs.adaptionlabs.ai/adaptive-data/select-columns/
+
+- `prompt` and `completion` are column names. At least one is required. If the other is missing, Adaptive Data generates it.
+- `context` is a list of column names (background or metadata), not a single string.
+- `image` is one column of image bytes, URLs, or paths. Do not put images in `context`.
+- `chat` is one column of multi-turn message arrays. It replaces `prompt`, `completion`, and `context`.
+- `universal_prompt` is a shared instruction string for every row, not a column name. Use it when the dataset has no prompt column. It requires `context` or `image` to vary each row, and is mutually exclusive with `prompt`.
 
 ```json
 {
@@ -85,9 +115,26 @@ When running adaptation, specify how columns map to training format:
 }
 ```
 
+## Adaptation Options
+
+Beyond `column_mapping`, `run_dataset_adaptation` accepts:
+
+| Parameter | Description |
+|-----------|-------------|
+| `training_type` | `instruction_dataset` (default) or `preference_pairs`. Use `preference_pairs` to prepare a dataset for an alignment training run |
+| `recipe_specification` | Toggles for `prompt_rephrase`, `deduplication`, and `reasoning_traces` under a `recipes` object |
+| `brand_controls` | `length` (`minimal`, `concise`, `detailed`, `extensive`), `safety_categories`, `hallucination_mitigation`, and `blueprint` |
+| `job_specification` | `max_rows` to cap the run, plus `idempotency_key` |
+| `language_expansion` | Same `translate`/`localize` spec as dataset generation |
+| `estimate` | Set `true` to preview cost without launching |
+
 ## Tips
 
 - Use `estimate: true` parameter to preview costs before launching operations
-- Poll `get_dataset_status` every 5-10 seconds during processing
+- Poll `get_dataset_status` every 5-10 seconds during processing — it returns
+  `progress_percentage` alongside the status
+- Filter `list_datasets` with `status` (`pending`, `running`, `awaiting_input`,
+  `succeeded`, `failed`) or a `query` string instead of paging through everything
+- Launch responses carry a `next_action` naming the tool to call next — follow it
 - Check `get_dataset_evaluation` for quality metrics after adaptation
 - Use `idempotency_key` for safe retries on launch operations
