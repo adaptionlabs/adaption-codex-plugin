@@ -10,7 +10,6 @@ account in the browser; no API key is needed.
 
 ### Codex CLI
 
-
 ```bash
 codex plugin marketplace add adaptionlabs/adaption-codex-plugin
 codex plugin add adaption@adaption
