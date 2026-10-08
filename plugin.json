@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "adaption",
   "version": "0.1.0",
-  "description": "Adaption plugin for ChatGPT and Codex — datasets, fine-tuning, and AutoScientist workflows powered by the Adaption MCP server",
+  "description": "Adaption plugin for ChatGPT and Codex — datasets and fine-tuning workflows powered by the Adaption MCP server",
   "author": {
     "name": "Adaption Labs",
     "email": "support@adaptionlabs.ai"
