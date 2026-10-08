@@ -31,7 +31,7 @@
         "privacyPolicyURL": "https://adaptionlabs.ai/privacy-policy",
         "termsOfServiceURL": "https://adaptionlabs.ai/terms-of-service",
         "defaultPrompt": [
-          "List my Adaption datasets",
+          "Invent a dataset of multi-turn conversations between a teacher and a student"
           "Import a dataset from HuggingFace and adapt it",
           "Start an AutoScientist training run"
         ],
