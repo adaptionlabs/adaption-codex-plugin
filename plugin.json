@@ -28,16 +28,16 @@
         "category": "Development",
         "capabilities": ["Read", "Write"],
         "websiteURL": "https://adaptionlabs.ai",
-        "privacyPolicyURL": "https://adaptionlabs.ai/privacy",
-        "termsOfServiceURL": "https://adaptionlabs.ai/terms",
+        "privacyPolicyURL": "https://adaptionlabs.ai/privacy-policy",
+        "termsOfServiceURL": "https://adaptionlabs.ai/terms-of-service",
         "defaultPrompt": [
           "List my Adaption datasets",
           "Import a dataset from HuggingFace and adapt it",
           "Start an AutoScientist training run"
         ],
-        "brandColor": "#3B82F6",
-        "composerIcon": "./assets/icon.svg",
-        "logo": "./assets/logo.svg"
+        "brandColor": "#000000",
+        "composerIcon": "./assets/logo.png",
+        "logo": "./assets/logo.png"
       }
     }
   }

@@ -2,41 +2,76 @@
 
 Connect ChatGPT and Codex to [Adaption](https://adaptionlabs.ai) for dataset management, fine-tuning, and AutoScientist workflows.
 
+The plugin bundles three skills and the remote Adaption MCP server
+(`https://api.prod.adaptionlabs.ai/api/v1/mcp`). You sign in with your Adaption
+account in the browser; no API key is needed.
+
 ## Installation
 
-### From Plugins Directory (Coming Soon)
+### Codex CLI
 
-1. Open ChatGPT or Codex
-2. Go to **Plugins Directory**
-3. Search for **"Adaption"**
-4. Click **Install**
-5. Authenticate with your Adaption account
+Requires a recent Codex CLI (tested with 0.161).
 
-### Local Development
+```bash
+codex plugin marketplace add adaptionlabs/adaption-codex-plugin
+codex plugin add adaption@adaption
+codex mcp login adaption
+```
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/adaptionlabs/adaption-codex-plugin.git
-   ```
+`codex mcp login` opens the Adaption sign-in page. Choose the organization and
+click **Authorize**. Check the connection with:
 
-2. Enable Developer Mode in ChatGPT:
-   - Open **Settings** → **Security and login**
-   - Turn on **Developer mode**
+```bash
+codex mcp list
+```
 
-3. Register the MCP server:
-   - Go to **ChatGPT Plugins** → click **+**
-   - Enter MCP server URL: `https://api.adaption.ai/api/v1/mcp`
-   - Complete authentication
+`adaption` should show as logged in.
 
-4. Add to local marketplace (optional):
-   - Use `@plugin-creator` or manually create a marketplace entry
-   - Point to the cloned plugin directory
+### Codex in the ChatGPT desktop app
 
-### Get Your API Key
+1. Add the marketplace with the CLI command above (the desktop app reads the
+   same configuration), then restart the app
+2. Open the **Plugins Directory**, choose the **Adaption** marketplace, and
+   install **Adaption**
+3. Sign in with your Adaption account when prompted
 
-1. Go to [app.adaptionlabs.ai/settings/api-keys](https://app.adaptionlabs.ai/settings/api-keys)
-2. Create a new API key
-3. Use it when authenticating the MCP server connection
+### ChatGPT
+
+A listing in the public Plugins Directory is coming soon. Until then, add the
+MCP server as a custom connector:
+
+1. Turn on **Developer mode** in ChatGPT settings
+2. Create a custom connector with the MCP server URL
+   `https://api.prod.adaptionlabs.ai/api/v1/mcp` and **OAuth** authentication
+3. Sign in with your Adaption account when ChatGPT redirects you
+
+### Headless use with an API key
+
+For CI or machines without a browser, skip `codex mcp login` and authenticate
+with an Adaption API key instead. Create one at
+[adaptionlabs.ai/app/settings](https://adaptionlabs.ai/app/settings?tab=api_keys)
+and add the server to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.adaption]
+url = "https://api.prod.adaptionlabs.ai/api/v1/mcp"
+bearer_token_env_var = "ADAPTION_API_KEY"
+```
+
+Then export `ADAPTION_API_KEY` in the environment Codex runs in.
+
+### Local development
+
+```bash
+git clone https://github.com/adaptionlabs/adaption-codex-plugin.git
+cd adaption-codex-plugin
+codex plugin marketplace add ./
+codex plugin add adaption@adaption
+```
+
+Codex installs a copy into `~/.codex/plugins/cache/`. After changing the plugin,
+run `codex plugin remove adaption@adaption` and add it again, then restart
+Codex.
 
 ## Features
 
@@ -120,9 +155,8 @@ Once installed, interact with Adaption through natural conversation:
 
 ## Requirements
 
-- ChatGPT Plus or Codex subscription
-- Adaption account with API access
-- API key with MCP scopes
+- Codex CLI, the ChatGPT desktop app, or ChatGPT with Developer mode
+- An Adaption account
 
 ## Support
 
