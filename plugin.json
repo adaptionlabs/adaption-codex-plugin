@@ -25,7 +25,7 @@
         "shortDescription": "AI datasets & model training",
         "longDescription": "Import, adapt, augment, translate, and combine datasets. Launch AutoScientist training runs. Generate synthetic datasets with Invent.",
         "developerName": "Adaption Labs",
-        "category": "Development",
+        "category": "Developer Tools",
         "capabilities": ["Read", "Write"],
         "websiteURL": "https://adaptionlabs.ai",
         "supportURL": "https://docs.adaptionlabs.ai/resources/support",
@@ -41,6 +41,7 @@
         "logo": "./assets/logo.png"
       },
       "review": {
+        "demo_recording_url": "https://drive.google.com/file/d/1qhbG7T-Fg_QwoMVBxQIxsjfSvw21DVhM/view?usp=sharing",
         "test_cases": {
           "positive": [
             {
@@ -51,21 +52,21 @@
             },
             {
               "description": "Check the processing status of one dataset",
-              "prompt": "What is the status of my Customer Support Sample dataset?",
+              "prompt": "What is the status of my Bitext customer support dataset?",
               "tools_triggered": "list_datasets, get_dataset_status",
               "expected_behavior": "Finds the dataset by name and reports its current processing status and progress."
             },
             {
               "description": "Estimate an adaptation without launching it",
-              "prompt": "How many credits would it cost to adapt my Customer Support Sample dataset? Don't start it yet.",
+              "prompt": "How many credits would it cost to adapt my Bitext customer support dataset? Don't start it yet.",
               "tools_triggered": "list_datasets, run_dataset_adaptation",
               "expected_behavior": "Calls run_dataset_adaptation with estimate set to true, reports the credit estimate, and does not launch a job."
             },
             {
               "description": "Recommend a fine-tuning configuration",
-              "prompt": "Which base model and hyperparameters would you recommend for fine-tuning on my Customer Support Sample dataset?",
-              "tools_triggered": "list_training_models, recommend_autoscientist_hyperparameters",
-              "expected_behavior": "Returns a recommended base model and hyperparameters for the dataset without starting a training run."
+              "prompt": "Which base model and hyperparameters would you recommend for fine-tuning on my alpaca dataset that is ready for training?",
+              "tools_triggered": "list_datasets, recommend_autoscientist_hyperparameters",
+              "expected_behavior": "Picks the alpaca dataset with status succeeded and returns a recommended base model and hyperparameters without starting a training run."
             },
             {
               "description": "Estimate an invented dataset",
