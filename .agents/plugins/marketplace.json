@@ -1,0 +1,20 @@
+{
+  "name": "adaption",
+  "interface": {
+    "displayName": "Adaption"
+  },
+  "plugins": [
+    {
+      "name": "adaption",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development"
+    }
+  ]
+}
