@@ -25,7 +25,7 @@
         "shortDescription": "AI datasets & model training",
         "longDescription": "Import, adapt, augment, translate, and combine datasets. Launch AutoScientist training runs. Generate synthetic datasets with Invent.",
         "developerName": "Adaption Labs",
-        "category": "Development",
+        "category": "Developer Tools",
         "capabilities": ["Read", "Write"],
         "websiteURL": "https://adaptionlabs.ai",
         "supportURL": "https://docs.adaptionlabs.ai/resources/support",
