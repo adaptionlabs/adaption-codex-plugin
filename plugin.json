@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Adaption plugin for ChatGPT and Codex — datasets and fine-tuning workflows powered by the Adaption MCP server",
   "author": {
-    "name": "Adaption Labs",
+    "name": "Adaption",
     "email": "support@adaptionlabs.ai"
   },
   "homepage": "https://adaptionlabs.ai",
@@ -24,7 +24,7 @@
         "displayName": "Adaption",
         "shortDescription": "AI datasets & model training",
         "longDescription": "Import, adapt, augment, translate, and combine datasets. Launch AutoScientist training runs. Generate synthetic datasets with Invent.",
-        "developerName": "Adaption Labs",
+        "developerName": "Adaption",
         "category": "Developer Tools",
         "capabilities": ["Read", "Write"],
         "websiteURL": "https://adaptionlabs.ai",
