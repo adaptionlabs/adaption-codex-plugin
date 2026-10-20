@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "adaption",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Adaption plugin for ChatGPT and Codex — datasets and fine-tuning workflows powered by the Adaption MCP server",
   "author": {
     "name": "Adaption",
@@ -94,7 +94,7 @@
         "commerce_description": "The plugin does not sell products or process payments. Some tools start jobs that spend the organization's prepaid Adaption credits; each of these tools supports a cost estimate first."
       },
       "publication": {
-        "release_notes": "Initial release: Adaption MCP server with OAuth sign-in and three skills for dataset management, synthetic data generation (Invent), and AutoScientist fine-tuning."
+        "release_notes": "The MCP server connection now identifies requests as coming from the Codex plugin, so Adaption can attribute usage per client. No change to tools or sign-in."
       }
     }
   }
